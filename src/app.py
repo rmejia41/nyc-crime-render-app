@@ -19,7 +19,7 @@ results = client.get(data_set, limit=2000)
 # Convert the list of dictionaries to a Pandas data frame
 df = pd.DataFrame.from_records(results)
 # Save the data frame to a CSV file
-df.to_csv("C:/Users/Biu9/PycharmProjects/open_datasets/my_311_data_.csv")
+#df.to_csv("C:/Users/Biu9/PycharmProjects/open_datasets/my_311_data_.csv")
 df = df[['arrest_date', 'arrest_boro', 'jurisdiction_code', 'perp_sex', 'perp_race', 'age_group', 'pd_desc']]
 
 #rename values for nyc boroughs and perpetrator sex
