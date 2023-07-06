@@ -5,6 +5,7 @@ from sodapy import Socrata
 from dash import Dash, dcc, html, Input, Output, callback, dash_table
 import plotly.express as px
 import dash_bootstrap_components as dbc
+import dash_auth
 
 #read NYC open data
 data_url='data.cityofnewyork.us'    # The Host Name for the API endpoint (the https:// part will be added automatically)
@@ -44,6 +45,12 @@ df2 = dff.groupby(['date_of_arrest', 'location', 'race']).size().reset_index(nam
 stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = Dash(__name__, external_stylesheets=stylesheets)
 server = app.server
+
+auth = dash_auth.BasicAuth(
+    app,
+    {'nyc':'crimen',
+     'nycapp':'arresto'}
+)
 
 app.layout = html.Div([
 
@@ -119,4 +126,4 @@ def update_side_graph(hov_data, clk_data, slct_data, boro_chosen):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, port=8071)
