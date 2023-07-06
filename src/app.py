@@ -7,6 +7,7 @@ import plotly.express as px
 import dash_bootstrap_components as dbc
 import dash_auth
 
+
 #read NYC open data
 data_url='data.cityofnewyork.us'    # The Host Name for the API endpoint (the https:// part will be added automatically)
 data_set='uip8-fykc'    # The data set at the API endpoint (311 data in this case)
@@ -41,16 +42,15 @@ dff.rename({'perp_sex':'sex'},axis=1, inplace=True)
 dff.rename({'perp_race':'race'},axis=1, inplace=True)
 df2 = dff.groupby(['date_of_arrest', 'location', 'race']).size().reset_index(name='counts')
 
-
 stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = Dash(__name__, external_stylesheets=stylesheets)
 server = app.server
 
-auth = dash_auth.BasicAuth(
-    app,
-    {'nyc':'crimen',
-     'nycapp':'arresto'}
-)
+# auth = dash_auth.BasicAuth(
+#     app,
+#     {'nyc':'crimen',
+#      'nycapp':'arresto'}
+# )
 
 app.layout = html.Div([
 
@@ -126,4 +126,4 @@ def update_side_graph(hov_data, clk_data, slct_data, boro_chosen):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=False, port=8071)
+    app.run_server(debug=False)
