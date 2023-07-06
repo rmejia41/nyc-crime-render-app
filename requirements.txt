@@ -6,4 +6,4 @@ plotly==5.15.0
 sodapy==2.2.0
 gunicorn
 dash-tools
-ploty.express
+plotly_express
