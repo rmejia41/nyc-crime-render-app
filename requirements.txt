@@ -7,3 +7,4 @@ sodapy==2.2.0
 gunicorn
 dash-tools
 plotly_express
+dash_auth
