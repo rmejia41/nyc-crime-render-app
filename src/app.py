@@ -5,13 +5,19 @@ from sodapy import Socrata
 from dash import Dash, dcc, html, Input, Output, callback, dash_table
 import plotly.express as px
 import dash_bootstrap_components as dbc
+import dash_auth
 
+USER_PASS_MAPPING = {"rm1": "rm1",
+                     "rm123": "rm123",
+                     "rm456": "rm456",
+                     }
 
 #read NYC open data
 data_url='data.cityofnewyork.us'    # The Host Name for the API endpoint (the https:// part will be added automatically)
 data_set='uip8-fykc'    # The data set at the API endpoint (311 data in this case)
-app_token='qhW5Sl8E8hKe4rxqJ9WfG00Oc'   # The app token created in the prior steps
-client = Socrata(data_url,app_token)      # Create the client to point to the API endpoint
+app_token='qhW5Sl8E8hKe4rxqJ9WfG00Oc'  # The app token created in the prior steps
+client = Socrata(data_url,app_token)      # Create th
+# e client to point to the API endpoint
 # Set the timeout to 60 seconds
 client.timeout = 90
 # Retrieve the first 2000 results returned as JSON object from the API
@@ -44,6 +50,7 @@ df2 = dff.groupby(['date_of_arrest', 'location', 'race']).size().reset_index(nam
 stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = Dash(__name__, external_stylesheets=stylesheets)
 server = app.server
+auth = dash_auth.BasicAuth(app, USER_PASS_MAPPING)
 
 # auth = dash_auth.BasicAuth(
 #     app,
