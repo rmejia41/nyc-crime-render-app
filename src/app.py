@@ -7,10 +7,6 @@ import plotly.express as px
 import dash_bootstrap_components as dbc
 import dash_auth
 
-USER_PASS_MAPPING = {"rm1": "rm1",
-                     "rm123": "rm123",
-                     "rm456": "rm456",
-                     }
 
 #read NYC open data
 data_url='data.cityofnewyork.us'    # The Host Name for the API endpoint (the https:// part will be added automatically)
@@ -50,7 +46,6 @@ df2 = dff.groupby(['date_of_arrest', 'location', 'race']).size().reset_index(nam
 stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 app = Dash(__name__, external_stylesheets=stylesheets)
 server = app.server
-auth = dash_auth.BasicAuth(app, USER_PASS_MAPPING)
 
 # auth = dash_auth.BasicAuth(
 #     app,
